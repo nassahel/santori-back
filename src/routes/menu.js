@@ -1,12 +1,14 @@
 const { Router } = require("express");
 const { check } = require('express-validator');
-const { menuesGet, menuPost, menuPut, menuDelete } = require("../controllers/menu");
+const { menuesGet, menuGetCat, menuPost, menuPut, menuDelete } = require("../controllers/menu");
 const { nombreMenuExiste, menuIdExiste } = require("../helpers/db-validators");
 const { validarCampos } = require("../middlewares/validar-campos");
 
 const router = Router();
 
 router.get("/", menuesGet);
+
+router.get("/:category", menuGetCat)
 
 router.post("/",
 [

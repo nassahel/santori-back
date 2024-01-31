@@ -1,4 +1,3 @@
-const { request, response } = require('express');
 const Menu = require('../models/menu');
 
 const menuesGet = async (req, res) => {
@@ -17,7 +16,18 @@ const menuesGet = async (req, res) => {
 }
 
 
-const menuPost = async (req = request, res = response) => {
+const menuGetCat = async (req, res) => {
+    try {
+        const category = req.params.category;
+        const result = await Menu.find({ category: category }).select('_id name detail price category image active');
+
+        res.json(result)
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+const menuPost = async (req, res) => {
     try {
         const datos = req.body;
         const { name, detail, price, category, image, active } = datos;
@@ -97,6 +107,7 @@ const menuDelete = async (req, res) => {
 
 module.exports = {
     menuesGet,
+    menuGetCat,
     menuPost,
     menuPut,
     menuDelete
