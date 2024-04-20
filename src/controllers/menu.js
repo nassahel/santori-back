@@ -2,7 +2,7 @@ const Menu = require('../models/menu');
 
 const menuesGet = async (req, res) => {
     try {
-        const menues = await Menu.find().select('_id name detail price category image active');
+        const menues = await Menu.find({ active: true }).select('_id name detail price category image active');
 
         res.status(200).json({
             mensaje: "Menues obtenidos del sistema",
@@ -19,8 +19,8 @@ const menuesGet = async (req, res) => {
 const menuGetCat = async (req, res) => {
     try {
         const category = req.params.category;
-        const result = await Menu.find({ category: category }).select('_id name detail price category image active');
-
+        const result = await Menu.find({ category: category });
+        
         res.json(result)
     } catch (error) {
         res.send(error);
