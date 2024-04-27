@@ -8,9 +8,10 @@ const router = Router();
 
 router.use(validarJWT);
 
-router.get('/', validarJWT, getOrders);
 
-router.get('/:id', validarJWT, getOrder);
+router.get('/', /* validarJWT, */  getOrders);
+
+router.get('/:id', /* validarJWT, */ getOrder);
 
 router.post('/', [
   check('order', 'La orden es obligatoria').isLength({ min: 4, max: 40 }),
