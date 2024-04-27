@@ -49,25 +49,20 @@ const getOrder = async (req = request, res = response) => {
 
 const postOrder = async (req, res) => {
   try {
-    const { order, totalCost, status } = req.body;
+    const { fecha, productos, total } = req.body;
     const usuario = req.usuario;
 
-    if (!Array.isArray(order)) {
+    if (!Array.isArray(productos)) {
       return res.status(400).json({ message: 'La orden debe ser un array de objetos.' });
     }
 
-    const menuItems = order.map(menu => {
-      const { name, quantity, id, price, category, image } = menu;
-      return { name, quantity, id, price, category, image };
-    });
+   
 
-    const orderStatus = status ? status.toLowerCase() : 'pendiente';
 
-    const newOrder = new Order({
-      user: usuario._id,
-      order: menuItems,
-      totalCost,
-      status: orderStatus,
+    const newOrder = new Order({     
+      order: productos,
+      total: total,
+      fecha: fecha,
     });
 
     await newOrder.save();
