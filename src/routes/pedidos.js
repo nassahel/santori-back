@@ -6,18 +6,20 @@ const { getOrders, getOrder, postOrder, putOrder, deleteOrder, } = require('../c
 
 const router = Router();
 
-router.use(validarJWT);
+// router.use(validarJWT);
 
 
 router.get('/', validarJWT,  getOrders);
 
 router.get('/:id', validarJWT, getOrder);
 
-router.post('/', /* [
+router.post('/',postOrder);
+
+ /* [
   check('order', 'La orden es obligatoria').isLength({ min: 4, max: 40 }),
   check('totalCost', 'El Costo Total es obligatorio').isNumeric().notEmpty(),
   validarCampos, 
-], */ postOrder);
+], */ 
 
 router.put('/:id', 
 [

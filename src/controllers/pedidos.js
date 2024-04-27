@@ -47,32 +47,60 @@ const getOrder = async (req = request, res = response) => {
   }
 };
 
+// const postOrder = async (req, res) => {
+//   try {
+    
+
+//     const newOrder = req.body;
+
+//     if (!Array.isArray(productos)) {
+//       return res.status(400).json({ message: 'La orden debe ser un array de objetos.' });
+//     }
+
+//     const newOrder = new Order({
+//       order: productos,
+//       total: total,
+//       fecha: fecha,
+//     });
+
+//     await newOrder.save();
+
+//     res.status(201).json({
+//       order: newOrder,
+//       message: 'Pedido creado',
+//     });
+//   } catch (error) {
+//     console.error('Error al crear el Pedido', error);
+//     res.status(500).json({ message: 'Hubo un error al crear el Pedido' });
+//   }
+// };
+
+
+
 const postOrder = async (req, res) => {
   try {
-    const { fecha, productos, total } = req.body;
-    // const usuario = req.usuario;
+    const orderData = req.body; // Obtener los datos del pedido del cuerpo de la solicitud
 
-    if (!Array.isArray(productos)) {
-      return res.status(400).json({ message: 'La orden debe ser un array de objetos.' });
-    }
+    // Crear una nueva instancia del modelo Order utilizando los datos del pedido
+    const newOrder = new Order(orderData);
 
-       const newOrder = new Order({     
-      order: productos,
-      total: total,
-      fecha: fecha,
-    });
-
+    // Guardar la nueva instancia del pedido en la base de datos
     await newOrder.save();
 
+    // Responder con el pedido creado y un mensaje de éxito
     res.status(201).json({
       order: newOrder,
       message: 'Pedido creado',
     });
   } catch (error) {
+    // Manejar cualquier error que ocurra durante el proceso de creación del pedido
     console.error('Error al crear el Pedido', error);
     res.status(500).json({ message: 'Hubo un error al crear el Pedido' });
   }
 };
+
+
+
 
 const putOrder = async (req = request, res = response) => {
 
