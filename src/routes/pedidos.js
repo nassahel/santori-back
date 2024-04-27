@@ -13,7 +13,7 @@ router.get('/', validarJWT,  getOrders);
 
 router.get('/:id', validarJWT, getOrder);
 
-router.post('/',postOrder);
+router.post('/', postOrder);
 
  /* [
   check('order', 'La orden es obligatoria').isLength({ min: 4, max: 40 }),

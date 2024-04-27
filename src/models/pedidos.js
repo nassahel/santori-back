@@ -2,22 +2,22 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
-  active: { type: Boolean, required: true },
-  category: { type: String, required: true },
+  active: { type: Boolean,},
+  category: { type: String,  },
   comentario: { type: String, default: '' },
-  detail: { type: String, required: true },
-  image: { type: String, required: true },
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
-  quantity: { type: Number, required: true },
-  totalProducto: { type: Number, required: true },
-  _id: { type: String, required: true }
+  detail: { type: String,  },
+  image: { type: String, },
+  name: { type: String, },
+  price: { type: Number,  },
+  quantity: { type: Number, },
+  totalProducto: { type: Number,  },
+  _id: { type: String,  }
 });
 
 const OrderSchema = new Schema({
   fecha: { type: Date, default: Date.now },
   productos: [productSchema], // Utiliza el esquema de producto como tipo de datos
-  total: { type: Number, required: true }
+  total: { type: Number, }
 });
 
 const Order = mongoose.model('Pedidos', OrderSchema);
