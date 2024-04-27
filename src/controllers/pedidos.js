@@ -50,16 +50,13 @@ const getOrder = async (req = request, res = response) => {
 const postOrder = async (req, res) => {
   try {
     const { fecha, productos, total } = req.body;
-    const usuario = req.usuario;
+    // const usuario = req.usuario;
 
     if (!Array.isArray(productos)) {
       return res.status(400).json({ message: 'La orden debe ser un array de objetos.' });
     }
 
-   
-
-
-    const newOrder = new Order({     
+       const newOrder = new Order({     
       order: productos,
       total: total,
       fecha: fecha,
