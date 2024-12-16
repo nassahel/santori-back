@@ -3,12 +3,14 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 const port = process.env.PORT;
 const mongoBDurl = process.env.MONGODB_URI;
 
 
 app.use(express.json());
+app.use(cors())
 
 
 
