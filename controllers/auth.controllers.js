@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 
 
 const userLogin = async (req, res) => {
-
     try {
         const { email, password } = req.body;
         const foundUser = await User.findOne({ email });
@@ -18,7 +17,7 @@ const userLogin = async (req, res) => {
             rol: foundUser.rol
         }
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' })
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1days' })
         res.send({ token })
     } catch (error) {
         res.status(400).send({ message: 'No se pudo loguear', error })
