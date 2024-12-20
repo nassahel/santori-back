@@ -17,9 +17,27 @@ const createProduct = async (req, res) => {
 
 
 const getAllProducts = async (req, res) => {
+    if (req.user.rol === 'ADMIN' || 'SUPERADMIN') {
+        try {
+            const allProducts = await Product.find();
+            res.send(allProducts);
+        } catch (error) {
+            res.status(400).send({
+                message: 'No se pudo enontrar productos',
+                error
+            })
+        }
+    } else {
+        res.status(401).send('Acceso denegado')
+    }
+
+}
+
+const getProductsByCategory = async (req, res) => {
     try {
-        const allProducts = await Product.find();
-        res.send(allProducts);
+        const { category } = req.params;
+        const products = await Product.find({ category });
+        res.send(products);
     } catch (error) {
         res.status(400).send({
             message: 'No se pudo enontrar productos',
@@ -45,4 +63,4 @@ const deleteProduct = async (req, res) => {
 
 
 
-module.exports = { createProduct, deleteProduct, getAllProducts } 
+module.exports = { createProduct, deleteProduct, getAllProducts, getProductsByCategory } 

@@ -24,10 +24,29 @@ const createUser = async (req, res) => {
 
 
 const getAllUsers = async (req, res) => {
+    if (req.user.rol === 'ADMIN' || 'SUPERADMIN') {
+        try {
+            const allUsers = await User.find();
+            res.send(allUsers);
+        } catch (error) {
+            res.send(error)
+        }
+    } else {
+        res.status(401).send('Acceso denegado')
+    }
+
+}
+
+const getUserById = async (req, res) => {
     try {
-        const allUsers = await User.find();
-        console.log(allUsers);
-        res.send(allUsers);
+        const userFound = await User.findById(req.params.userId);
+        res.send({
+            name: userFound.name,
+            email: userFound.email,
+            direction: userFound.direction,
+            rol: userFound.rol,
+            userImage: userFound.userImage
+        });
     } catch (error) {
         res.send(error)
     }
@@ -50,4 +69,4 @@ const deleteUser = async (req, res) => {
 
 
 
-module.exports = { createUser, getAllUsers, deleteUser } 
+module.exports = { createUser, getAllUsers, deleteUser, getUserById } 
