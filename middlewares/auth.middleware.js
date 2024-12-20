@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const authenticate = (req, res, next) => {
     const authHeader = req.header('Authorization');
     if (!authHeader) return res.status(401).send({ message: 'Acceso denegado 1' })
-
     const token = authHeader.replace('Bearer ', '');
     if (!token) return res.status(401).send({ message: 'Acceso denegado 2' })
     try {
