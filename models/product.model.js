@@ -10,7 +10,7 @@ const productSchema = new Schema({
     category: {type: String, required:true},
     isOffer: { type: Boolean, default: false },
     productImage: { type: String, default: '' },
-    offerPrice: { type: Number || null, default: null },
+    offerPrice: { type: Number, default: 0 },
 }, { timestamps: true })
 
 
